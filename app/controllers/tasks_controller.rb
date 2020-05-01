@@ -53,9 +53,9 @@ class TasksController < ApplicationController
   private
   
   def set_task
-    @task = params.require(:task).permit(:content, :status)
+    @task =  current_user.tasks.find_by(id: params[:id])
     unless @task
-      recirect_to root_url
+      redirect_to root_url
     end
   end
 
