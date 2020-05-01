@@ -53,7 +53,10 @@ class TasksController < ApplicationController
   private
   
   def set_task
-    @task = Task.find(params[:id])
+    @task = params.require(:task).permit(:content, :status)
+    unless @task
+      recirect_to root_url
+    end
   end
 
   # Strong Parameter
